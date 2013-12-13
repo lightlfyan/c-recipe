@@ -1,0 +1,46 @@
+
+; merge的四种方式
+
+; 直接合并
+git merge other
+git merge --no-ff other
+git merge -squash other
+
+; 使用临时分支合并远程分支
+git fetch origin develop:tmp
+git diff tmp
+git merge --no-ff tmp
+git branch -d tmp
+
+git fetch origin develop
+git log -p develop.. origin/develop
+git merge origin/develop
+
+; 使用rebase, 消除merge记录
+git rebase remote-branch-name
+    ; use git gc, delete old commit
+    ; the path save at .git/rebase
+    ; 逐步合并
+git add -u
+git rebase --continue
+git rebase --skip
+git rebase --abort 
+
+# 不提交，合并代码
+git stash
+git pull
+git stash pop
+
+
+//单独克隆某个分支
+git remote add -t Boss -f origin git@gitlab.rekoo.net:goddess/data.git
+git checkout Boss
+
+git branch --set-upstream-to=origin/master master
+git df master origin/master proto/game.proto
+
+; 查看那些文件被删
+git log --diff-filter=D
+
+; 重置
+git reset --hard ver
